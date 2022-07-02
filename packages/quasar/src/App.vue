@@ -1,21 +1,27 @@
-<script setup lang="ts">
-// This starter template is using Vue 3 <script setup> SFCs
-// Check out https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup
-import HelloWorld from './components/HelloWorld.vue';
-</script>
-
 <template>
-  <img alt="Vue logo" src="./assets/logo.png" />
-  <HelloWorld msg="Hello Vue 3 + TypeScript + Vite" />
+  <div id="q-app" class="w-500">
+    <router-view />
+  </div>
 </template>
+<script lang="ts">
+import { defineComponent, watch } from 'vue';
+import { useEnvironment } from '../../../netlify_functions';
+// import { initIntercom, Intercom } from '@ligo/shared/utils';
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+export default defineComponent({
+  name: 'App',
+  setup() {
+    // document.documentElement.setAttribute('lang', root.$i18n.locale);
+    // watch(
+    //   () => root.$i18n.locale,
+    //   (newVal) => {
+    //     document.documentElement.setAttribute('lang', newVal);
+    //   }
+    // );
+    // initIntercom(useEnvironment().INTERCOM_KEY);
+    // Intercom.identifyUser(null);
+    // Intercom.update();
+    return {};
+  }
+});
+</script>
