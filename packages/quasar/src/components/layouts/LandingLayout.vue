@@ -32,9 +32,12 @@ import {
   watch,
   PropType
 } from 'vue';
+import { useI18n } from 'vue-i18n'
+import { useRouter, useRoute } from 'vue-router'
 import { useDrawerConfig, setMaskURL } from './landing-layout.hooks';
-import { getURLsDictionary } from '@ligo/shared/storyblok';
 import { urlByLocale } from '../tools';
+import { getURLsDictionary } from '../../storyblook';
+
 
 const EN = ['en', 'en'];
 const NL = ['nl'];
@@ -47,7 +50,10 @@ export default defineComponent({
       type: (String as unknown) as PropType<'en' | 'nl'>
     }
   },
-  setup(props, { root }) {
+  setup(props) {
+    const i18n = useI18n()
+    const router = useRouter()
+    const route = useRoute()
     const toolbar = ref(null);
     const redirectionOnLocalChange = ref(false);
     const footerLoading = ref(true);
@@ -56,10 +62,10 @@ export default defineComponent({
     let checkPath;
 
     if (['nl', 'en'].includes(props.locale)) {
-      root.$i18n.locale = props.locale;
+      i18n.locale.value = props.locale;
       localStorage.setItem('locale', props.locale);
-      root.$router.replace({
-        path: root.$router.currentRoute.path,
+      router.replace({
+        path: router.currentRoute.value.path,
         query: {}
       });
     }
@@ -70,21 +76,21 @@ export default defineComponent({
     }
 
     function changeState(newState: boolean, locale: string, url?: string) {
-      setMaskURL(locale, root.$route.path, getURLsDictionary(root));
+      setMaskURL(locale, route.path, getURLsDictionary(root));
       if (url) redirectionUrl.value = url;
       redirectionOnLocalChange.value = newState;
       changeLanguage(locale == 'nl' ? 'nl' : 'en', false);
     }
 
     const stored = localStorage.getItem('locale');
-    const lang = ref(stored ? stored : root.$i18n.locale) as Ref<'en' | 'nl'>;
+    const lang = ref(stored ? stored : i18n.locale.value) as Ref<'en' | 'nl'>;
 
     (changeLanguage = (language: 'en' | 'nl', emittedFromSwitch = false) => {
       lang.value = language;
-      root.$i18n.locale = lang.value === 'en' ? 'en' : language;
+      i18n.locale.value = lang.value === 'en' ? 'en' : language;
       localStorage.setItem('locale', lang.value);
       if (emittedFromSwitch && redirectionOnLocalChange.value)
-        root.$router.push(urlByLocale(redirectionUrl.value, root.$i18n.locale));
+        router.push(urlByLocale(redirectionUrl.value, i18n.locale.value));
     })(lang.value);
 
     (checkPath = (path: string) => {
@@ -93,10 +99,10 @@ export default defineComponent({
       } else if (!path.startsWith('/' + EN[1]) && !NL.includes(lang.value)) {
         changeLanguage(NL[0]);
       }
-    })(root.$route.path);
+    })(route.path);
 
     watch(
-      () => root.$route.path,
+      router.currentRoute,
       (newPath) => {
         checkPath(newPath);
       }

@@ -91,6 +91,7 @@ import {
   useLandingDrawerConfig,
   useLandingDrawerDimensions
 } from './drawer/landing-drawer.hooks';
+import { useI18n } from 'vue-i18n';
 
 export default defineComponent({
   name: 'LandingDrawer',
@@ -118,6 +119,7 @@ export default defineComponent({
   },
   setup() {
     const $q = useQuasar()
+    const i18n = useI18n()
     const { config, forConsultants, i18nSwitch } = useToolbarConfig();
     const { config: footer } = useFooterConfig();
     const {
@@ -131,7 +133,7 @@ export default defineComponent({
     } = useLandingDrawerDimensions();
 
     function getTranslatedOptions(options: Array<string>) {
-      return options.map((x: string) => root.$i18n.t(x));
+      return options.map((x: string) => i18n.t(x));
     }
 
     const drawerSizeClass = computed(() => {

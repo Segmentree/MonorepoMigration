@@ -1,11 +1,12 @@
 <template>
-  <app-link :to="urlByLocale(href, $i18n.locale)">
+  <app-link :to="urlByLocale(href, locale)">
     <slot />
   </app-link>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import { useI18n } from 'vue-i18n';
 import { urlByLocale } from '../../../tools';
 
 export default defineComponent({
@@ -17,7 +18,8 @@ export default defineComponent({
     }
   },
   setup() {
-    return { urlByLocale };
+    const locale = useI18n().locale
+    return { urlByLocale, locale };
   }
 });
 </script>

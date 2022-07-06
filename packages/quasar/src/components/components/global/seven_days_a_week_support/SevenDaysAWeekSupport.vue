@@ -11,7 +11,7 @@
         <div class="col-12 q-mt-xl row">
           <a
             :href="
-              btn_link + ($i18n['locale'] == 'nl' ? `?locale=nl` : '?locale=en')
+              btn_link + (locale == 'nl' ? `?locale=nl` : '?locale=en')
             "
           >
             <base-button class="col-4" no-caps bg="primary" :text="btn_key" />
@@ -30,6 +30,7 @@
 <script lang="ts">
 import { defineComponent, PropType } from 'vue';
 import { StoryblokImage } from '../../../../storyblook';
+import { useI18n } from 'vue-i18n';
 export default defineComponent({
   name: 'SevenDaysAWeekSupport',
   props: {
@@ -38,6 +39,10 @@ export default defineComponent({
     btn_key: { type: String },
     btn_link: { type: String },
     image: { type: (Object as unknown) as PropType<StoryblokImage> }
+  },
+  setup() {
+    const locale = useI18n().locale
+    return {locale}
   }
 });
 </script>

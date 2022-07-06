@@ -1,7 +1,7 @@
 import { ref, watch, toRef, onMounted, Ref } from 'vue';
-import { EmitFunction, forcedLanguage, RootContext } from '@ligo/shared/utils';
+import { forcedLanguage } from '../../utils';
 
-export function getURLsDictionary(root: RootContext) {
+export function getURLsDictionary(root: any) {
   return {
     EN: root['$alias'].reverseEnDictionary,
     NL: root['$alias'].enDictionary
@@ -10,12 +10,12 @@ export function getURLsDictionary(root: RootContext) {
 
 export function useStoryblok(
   name: Ref<string>,
-  root: RootContext,
-  emit: EmitFunction
+  root: any,
+  emit: any,
+  locale: Ref<string>
 ) {
   const story = ref();
   const key = ref(0);
-  const locale = toRef(root.$i18n, 'locale');
 
   function getStory(slug: string, version: string) {
     emit('footer-loading', true);
@@ -38,7 +38,7 @@ export function useStoryblok(
           emit
         );
       })
-      .catch((error) => {
+      .catch((error: any) => {
         console.log(error);
         root.$router.push({ name: '404' });
       })

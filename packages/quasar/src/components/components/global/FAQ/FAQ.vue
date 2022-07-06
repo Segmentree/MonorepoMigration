@@ -113,6 +113,7 @@
 <script lang="ts">
 import { computed, defineComponent, PropType } from 'vue';
 import { ExpansionItem } from '../../../models/FAQ/FAQ';
+import { useI18n } from 'vue-i18n';
 
 export default defineComponent({
   name: 'FAQ',
@@ -126,10 +127,12 @@ export default defineComponent({
     }
   },
   setup(props) {
+    const i18n = useI18n()
+
     const localeItems = computed(() =>
       props.items.filter((item) =>
         item.locale && item.locale.length
-          ? item.locale.includes(root['$i18n'].locale)
+          ? item.locale.includes(i18n.locale.value)
           : true
       )
     );
