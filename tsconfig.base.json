@@ -8,6 +8,7 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "importHelpers": true,
+    "noImplicitAny": false,
     "target": "es2015",
     "module": "esnext",
     "lib": ["es2017", "dom"],
@@ -16,7 +17,10 @@
     "baseUrl": ".",
     "paths": {
       "@vue3/install": ["packages/install/src/index.ts"]
-    }
+    },
+    "types": [
+      "youtube"
+    ]
   },
   "exclude": ["node_modules", "tmp"]
 }
