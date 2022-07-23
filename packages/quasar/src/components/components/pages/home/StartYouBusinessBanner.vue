@@ -55,7 +55,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { WaterMarkContainer } from '@ligo/shared/components';
+import WaterMarkContainer from '../../base/WaterMarkContainer.vue';
 import SimpleButton from '../../global/SimpleButton.vue';
 
 const BIG_COTES = 'svg/big_cotes.svg';

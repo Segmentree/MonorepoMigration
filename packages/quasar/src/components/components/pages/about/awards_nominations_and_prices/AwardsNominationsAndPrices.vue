@@ -15,7 +15,7 @@
       </div>
     </div>
     <div v-if="$q.screen.lt.sm" class="full-width">
-      <q-img src="../svg/awards_mobile.jpg" />
+      <!-- <q-img src="../svg/awards_mobile.jpg" /> -->
     </div>
   </div>
 </template>

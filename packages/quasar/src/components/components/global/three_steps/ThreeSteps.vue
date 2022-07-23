@@ -50,8 +50,8 @@
 import { defineComponent, PropType } from 'vue';
 import SectionComponent from '../../global/Section.vue';
 import SectionHeader from '../../global/SectionHeader.vue';
+import BasicYouTubeVideo from '../../base/BasicYouTubeVideo.vue';
 import { StepButton, TextItem } from '../../../models';
-import { BasicYouTubeVideo } from '@ligo/shared/components';
 import { StoryblokImage } from '../../../../storyblook';
 
 export default defineComponent({

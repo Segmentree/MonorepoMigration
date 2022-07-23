@@ -43,11 +43,10 @@ import {
   onMounted,
   ref
 } from 'vue';
-import { install } from '@ligo/shared/utils';
 import Vue from 'vue';
 import * as ArticleComponents from './';
 import { ArticleSection, ArticleMenu } from '../../../models';
-import { scrollPercentage } from '@ligo/shared/utils';
+import { scrollPercentage, install } from '../../../../utils';
 
 const SCROLL_OFFSET = 160;
 const LINEAR_PROGRESS_SIZE = '6px';
@@ -64,7 +63,7 @@ export default defineComponent({
   },
   setup() {
     const toolbarHeight = ref(0);
-    install(Vue, Object.values(ArticleComponents));
+    install(Vue, Object.values(ArticleComponents) as any);
     const { percentage } = scrollPercentage(
       '#article-container',
       SCROLL_OFFSET

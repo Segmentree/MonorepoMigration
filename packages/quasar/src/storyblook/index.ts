@@ -1,6 +1,6 @@
 import RoutedPage from './components/RoutedPage.vue';
 
-export * from './boot/storyblok';
+export * from './storyblok';
 export * from './models';
 export * from './components/storyblok.hook';
 

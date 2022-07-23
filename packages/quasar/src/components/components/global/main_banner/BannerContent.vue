@@ -40,7 +40,7 @@
                 type="submit"
               />
             </q-form>
-            <a v-else-if="button.external" :key="i" :href="button.link">
+            <a v-else-if="button.external" :key="`a${i}`" :href="button.link">
               <base-button
                 class="c-minw-250"
                 :outline="button.outline"
@@ -48,7 +48,7 @@
                 :text="button.key"
               />
             </a>
-            <router-link v-else-if="button.link" :key="i" :to="button.link">
+            <router-link v-else-if="button.link" :key="`b${i}`"  :to="button.link">
               <base-button
                 class="c-minw-250"
                 :outline="button.outline"

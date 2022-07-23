@@ -34,17 +34,11 @@
 </template>
 
 <script lang="ts">
-import {
-  defineComponent,
-  PropType,
-  onMounted,
-  ref,
-  computed
-} from 'vue';
+import { defineComponent, PropType, onMounted, ref, computed } from 'vue';
 import SectionComponent from '../Section.vue';
-import { BilledCard } from '@ligo/shared/models';
 import BilledCardComponent from './BilledCard.vue';
-import { BasicStepperWrapper, FluidCardSlider } from '@ligo/shared/components';
+import BasicStepperWrapper from '../../base/BasicStepperWrapper.vue';
+import FluidCardSlider from '../../base/FluidCardSlider.vue';
 import { useQuasar } from 'quasar';
 
 export default defineComponent({
@@ -53,16 +47,16 @@ export default defineComponent({
     SectionComponent,
     FluidCardSlider,
     BasicStepperWrapper,
-    BilledCardComponent
+    BilledCardComponent,
   },
   props: {
     billedMonthly: String,
     billedYearly: String,
     save: String,
-    cards: (Array as unknown) as PropType<BilledCard[]>
+    cards: Array as unknown as PropType<any[]>,
   },
   setup(props) {
-    const $q = useQuasar()
+    const $q = useQuasar();
     const toolbarHeight = ref(null);
     const index = ref(0);
     const slider = ref(null);
@@ -86,9 +80,8 @@ export default defineComponent({
     });
 
     onMounted(() => {
-      toolbarHeight.value = document.getElementById(
-        'landing-toolbar'
-      )?.offsetHeight;
+      toolbarHeight.value =
+        document.getElementById('landing-toolbar')?.offsetHeight;
       if (toolbarHeight.value) toolbarHeight.value--;
     });
 
@@ -129,8 +122,8 @@ export default defineComponent({
       slider,
       cardsPerSlide,
       changeActive,
-      selector
+      selector,
     };
-  }
+  },
 });
 </script>

@@ -890,6 +890,20 @@
   dependencies:
     "@sinonjs/commons" "^1.7.0"
 
+"@storyblok/js@^1.6.1":
+  version "1.6.6"
+  resolved "https://registry.yarnpkg.com/@storyblok/js/-/js-1.6.6.tgz#a708edccce675cdb6e1ec07c3be874e36c3ea1a7"
+  integrity sha512-CyTo1h4MO4loyKkUBBA05xbHzzK5Kc6HrU5Yj4XGjYe8TrqaVTLDFV07UCHUSW7VD9OQLefB4MWon8nmFYb8ng==
+  dependencies:
+    storyblok-js-client "^4.5.6"
+
+"@storyblok/vue@^6.1.0":
+  version "6.1.0"
+  resolved "https://registry.yarnpkg.com/@storyblok/vue/-/vue-6.1.0.tgz#56fe6063294c471c8f6644b19da84ce4cf878a53"
+  integrity sha512-MlJ5c7FR5aOW83V6nNnH4F8t1Py72Qzz6LSyIysFN8i/t4UTIgOcJ/7WaJuBcFF69yBx3efvRkKKnVakq5cqQw==
+  dependencies:
+    "@storyblok/js" "^1.6.1"
+
 "@tootallnate/once@1":
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/@tootallnate/once/-/once-1.1.2.tgz#ccb91445360179a04e7fe6aff78c00ffc1eeaf82"
@@ -1067,6 +1081,11 @@
   integrity sha512-T8Yc9wt/5LbJyCaLiHPReJa0kApcIgJ7Bn735GjItUfh08Z1pJvu8QZqb9s+mMvKV6WUQRV7K2R46YbjMXTTJw==
   dependencies:
     "@types/yargs-parser" "*"
+
+"@types/youtube@^0.0.47":
+  version "0.0.47"
+  resolved "https://registry.yarnpkg.com/@types/youtube/-/youtube-0.0.47.tgz#b6e24385ef3b8a6c972d7316d93e8e27c12d0e7c"
+  integrity sha512-uwqm0DUeg+2pff/8y9b22JJb+qWKOcG5aCn2yyT7hmLdK/M8+VECcK6QuNqdAR93IAqTmZeqK2nizTlQg5j+XA==
 
 "@typescript-eslint/eslint-plugin@~5.24.0":
   version "5.24.0"
@@ -4720,6 +4739,11 @@ stack-utils@^2.0.3:
   integrity sha512-xrQcmYhOsn/1kX+Vraq+7j4oE2j/6BFscZ0etmYg81xuM8Gq0022Pxb8+IqgOFUIaxHs0KaSb7T1+OegiNrNFA==
   dependencies:
     escape-string-regexp "^2.0.0"
+
+storyblok-js-client@^4.5.6:
+  version "4.5.6"
+  resolved "https://registry.yarnpkg.com/storyblok-js-client/-/storyblok-js-client-4.5.6.tgz#caab0bb1ead8618f84afcc35be9305883d85e628"
+  integrity sha512-S0cXKkEqGDibD32K48FFodjeu/+eF++nrHhrLzo/bKxrnyQiPChPccFAnzsJCQ6uMvRuVGZzjKwM5/sMeBRthg==
 
 string-length@^4.0.1:
   version "4.0.2"

@@ -76,7 +76,7 @@ export default defineComponent({
     }
 
     function changeState(newState: boolean, locale: string, url?: string) {
-      setMaskURL(locale, route.path, getURLsDictionary(root));
+      // setMaskURL(locale, route.path, getURLsDictionary(root)); // FIX on new storyblok custom hook
       if (url) redirectionUrl.value = url;
       redirectionOnLocalChange.value = newState;
       changeLanguage(locale == 'nl' ? 'nl' : 'en', false);

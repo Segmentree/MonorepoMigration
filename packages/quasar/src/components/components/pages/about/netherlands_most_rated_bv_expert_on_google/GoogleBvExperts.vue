@@ -24,7 +24,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { BasicYouTubeVideo } from '@ligo/shared/components';
+import BasicYouTubeVideo from '../../../base/BasicYouTubeVideo.vue';
 import SectionComponent from '../../../global/Section.vue';
 
 const RADIUS = '90';

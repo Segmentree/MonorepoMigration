@@ -2,6 +2,7 @@ import { ref, watch, onMounted, Ref } from 'vue';
 import { Composer, useI18n } from 'vue-i18n';
 import { Router } from 'vue-router';
 import { forcedLanguage } from '../../utils';
+import {StoryblokClient} from "@storyblok/vue"
 
 export function getURLsDictionary() {
   return {
@@ -13,6 +14,7 @@ export function getURLsDictionary() {
 export function useStoryblok(
   name: Ref<string>,
   router: Router,
+  client: StoryblokClient,
   emit: any,
   locale: Ref<string>
 ) {
@@ -28,7 +30,7 @@ export function useStoryblok(
     //   ? root['$alias'].nlDictionary[slug]
     //   : slug;
     const url = slug
-    return root['$storyapi']
+    return client
       .get('cdn/stories/' + url + '?language=' + locale.value, {
         version
       })

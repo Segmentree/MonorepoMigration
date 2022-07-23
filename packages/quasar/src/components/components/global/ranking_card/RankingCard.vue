@@ -41,7 +41,10 @@
 <script lang="ts">
 import { defineComponent, computed } from 'vue';
 
-import { fractionToString } from '@ligo/shared/utils';
+function fractionToString(value: any, base: any) {
+  return value.toString() + '/' + base.toString();
+}
+
 
 export default defineComponent({
   name: 'RankingCard',

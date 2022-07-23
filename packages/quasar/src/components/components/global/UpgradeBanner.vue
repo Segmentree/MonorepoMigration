@@ -93,7 +93,7 @@
 import { defineComponent, PropType, ref } from 'vue';
 import { BlokImage } from '../../models';
 
-import { WaterMarkContainer } from '@ligo/shared/components';
+import WaterMarkContainer from '../base/WaterMarkContainer.vue';
 import GoogleSpan from './GoogleSpan.vue';
 import SimpleButton from './SimpleButton.vue';
 

@@ -90,7 +90,7 @@
 <script lang="ts">
 import { defineComponent, PropType } from 'vue';
 import { MediaButton, SectionBanner } from '../../../models';
-import { BasicYouTubeVideo } from '@ligo/shared/components';
+import BasicYouTubeVideo from '../../base/BasicYouTubeVideo.vue';
 
 export default defineComponent({
   name: 'StartYourBussines',

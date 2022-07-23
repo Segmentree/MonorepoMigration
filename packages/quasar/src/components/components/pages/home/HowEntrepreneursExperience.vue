@@ -84,7 +84,7 @@
 import { defineComponent, PropType } from 'vue';
 import LogosBanner from '../../global/logos_banner/LogosBanner.vue';
 import Carousel from '../../global/carousel/Carousel.vue';
-import { BasicYouTubeVideo } from '@ligo/shared/components';
+import BasicYouTubeVideo from '../../base/BasicYouTubeVideo.vue';
 import { Slide, Video, SubBanner } from '../../../models';
 
 export default defineComponent({

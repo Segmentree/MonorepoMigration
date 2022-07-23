@@ -37,7 +37,7 @@
 <script lang="ts">
 import { defineComponent, computed } from 'vue';
 
-import { WaterMarkContainer } from '@ligo/shared/components';
+import WaterMarkContainer from '../../base/WaterMarkContainer.vue';
 import { useQuasar } from 'quasar';
 
 const WATERMARKS = [

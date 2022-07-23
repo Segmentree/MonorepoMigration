@@ -45,8 +45,9 @@ import {
   PropType,
   onMounted
 } from 'vue';
-import { FluidCardSlider, BasicStepperWrapper } from '@ligo/shared/components';
 import { useQuasar } from 'quasar';
+import FluidCardSlider from '../base/FluidCardSlider.vue'
+import BasicStepperWrapper from '../base/BasicStepperWrapper.vue'
 
 export default defineComponent({
   name: 'Itemslider',

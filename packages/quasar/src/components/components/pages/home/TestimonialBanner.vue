@@ -33,8 +33,8 @@
 </template>
 
 <script lang="ts">
+import WaterMarkContainer from '../../base/WaterMarkContainer.vue';
 import { defineComponent, PropType } from 'vue';
-import { WaterMarkContainer } from '@ligo/shared/components';
 import { StoryblokImage } from '../../../../storyblook';
 
 const BIG_COTES = '/svg/big_cotes.svg';

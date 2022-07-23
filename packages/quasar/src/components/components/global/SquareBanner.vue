@@ -32,7 +32,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { BaseButton } from '@ligo/shared/components';
+import BaseButton from '../base/BaseButton.vue';
 
 export default defineComponent({
   name: 'SquareBanner',
