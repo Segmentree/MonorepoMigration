@@ -55,10 +55,9 @@ import {
   computed,
   PropType,
   ref,
-  Ref
+  Ref,
 } from 'vue';
 import BannerContent from './BannerContent.vue';
-import { StoryblokImage } from '@ligo/shared/storyblok';
 import KnownFrom from '../../KnownFrom.vue';
 import CategoriesResult from '../categories_search/CategoriesResults.vue';
 import SectionComponent from '../Section.vue';
@@ -70,6 +69,8 @@ import {
   CategoryItem,
   ReviewRatingObject
 } from '../../../models';
+import { useQuasar } from 'quasar';
+import { StoryblokImage } from '../../../../storyblook';
 
 const PERCENTS = {
   xl: '80%',
@@ -108,13 +109,14 @@ export default defineComponent({
     reviewSection: (Array as unknown) as PropType<ReviewRatingObject[]>,
     paddingTop: String
   },
-  setup(props, { root }) {
+  setup(props) {
+    const $q = useQuasar()
     const searchWord = ref('');
     const filteredList = ref({}) as Ref<CategoryItem[]>;
 
     const imgWidth = computed(() => {
-      if (root.$q.screen.gt.lg) return PERCENTS.xl;
-      if (root.$q.screen.gt.md) return PERCENTS.lg;
+      if ($q.screen.gt.lg) return PERCENTS.xl;
+      if ($q.screen.gt.md) return PERCENTS.lg;
       return PERCENTS.md;
     });
 

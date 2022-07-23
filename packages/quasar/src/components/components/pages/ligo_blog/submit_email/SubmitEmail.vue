@@ -38,51 +38,56 @@
 </template>
 
 <script lang="ts">
+import { useQuasar } from 'quasar';
 import { defineComponent } from 'vue';
+import { useI18n } from 'vue-i18n';
 import SectionComponent from '../../../global/Section.vue';
 import { useSubmitEmail } from './submit-email.hook';
 
 export default defineComponent({
   name: 'SubmitEmail',
   components: {
-    SectionComponent
+    SectionComponent,
   },
   props: {
     title: {
       type: String,
-      required: true
+      required: true,
     },
     placeholderText: {
       type: String,
-      required: true
+      required: true,
     },
     buttonText: {
       type: String,
-      required: true
+      required: true,
     },
     buttonColor: {
       type: String,
-      default: 'primary'
+      default: 'primary',
     },
     buttomTextColor: {
       type: String,
-      default: 'white'
+      default: 'white',
     },
     buttonCustomClass: {
       type: String,
-      default: 'col-auto button-inside-input full-height w-600 font-20'
-    }
+      default: 'col-auto button-inside-input full-height w-600 font-20',
+    },
   },
   setup() {
-    const { loading, sent, email, rules, onSubmit } = useSubmitEmail(root);
+    const { loading, sent, email, rules, onSubmit } = useSubmitEmail(
+      useI18n(),
+      useQuasar()
+    );
 
     return {
       loading,
       sent,
       email,
       rules,
-      onSubmit
+      onSubmit,
     };
-  }
+  },
 });
 </script>

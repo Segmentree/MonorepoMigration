@@ -54,6 +54,7 @@
 <script lang="ts">
 import { useQuasar } from 'quasar';
 import { defineComponent, ref, PropType } from 'vue';
+import { useI18n } from 'vue-i18n';
 import { TextItem } from '../../../../models';
 import {
   useValidations,
@@ -79,6 +80,7 @@ export default defineComponent({
   },
   setup() {
     const $q = useQuasar()
+    const i18n = useI18n()
     const name = ref('');
     const email = ref('');
     const phone = ref('');
@@ -121,7 +123,7 @@ export default defineComponent({
           $q.notify({
             type: 'negative',
             position: 'top',
-            message: root.$t('validations.hubspot').toString()
+            message: i18n.t('validations.hubspot').toString()
           });
         }
       } finally {
@@ -129,7 +131,7 @@ export default defineComponent({
       }
     };
 
-    const { required, validEmail } = useValidations(root);
+    const { required, validEmail } = useValidations(i18n);
 
     return {
       onSubmit,

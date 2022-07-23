@@ -1,5 +1,5 @@
 import { Ref } from "vue";
-import {useI18n } from 'vue-i18n'
+import {Composer, useI18n } from 'vue-i18n'
 const i18n = useI18n()
 
 export const textToLowerCase = (text: string) => {
@@ -7,17 +7,17 @@ export const textToLowerCase = (text: string) => {
 };
 
 export const forcedLanguage = (
-  root: any,
-  locale: Ref<string>,
+  locale: string,
+  i18n: Composer,
+  emit: Function,
   url = '/',
-  emit?: any,
   locales = ['nl', 'en-us', 'en']
 ) => {
-  if (locales.includes(locale.value)) {
-    // root.$i18n.locale = locale; COMMENT: Check use of this
-    localStorage.setItem('locale', locale.value);
-    if (emit) emit('changeState', true, locale.value, url);
+  if (locales.includes(locale)) {
+    i18n.locale.value = locale;
+    localStorage.setItem('locale', locale);
+    if (emit) emit('changeState', true, locale, url);
   } else {
-    if (emit) emit('changeState', false, locale.value, url);
+    if (emit) emit('changeState', false, locale, url);
   }
 };

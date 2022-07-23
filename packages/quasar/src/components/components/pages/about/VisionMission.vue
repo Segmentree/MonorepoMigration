@@ -38,6 +38,7 @@
 import { defineComponent, computed } from 'vue';
 
 import { WaterMarkContainer } from '@ligo/shared/components';
+import { useQuasar } from 'quasar';
 
 const WATERMARKS = [
   {
@@ -73,8 +74,9 @@ export default defineComponent({
     }
   },
   setup() {
+    const $q = useQuasar()
     const notMobile = computed(() => {
-      return root.$q.screen.gt.xs;
+      return $q.screen.gt.xs;
     });
 
     return {

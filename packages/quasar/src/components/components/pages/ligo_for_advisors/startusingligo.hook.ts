@@ -1,5 +1,7 @@
-import { ApiService, RootContext } from '@ligo/shared/utils';
+import { ApiService } from '@ligo/shared/utils';
+import { QVueGlobals } from 'quasar';
 import { ref } from 'vue';
+import { Composer } from 'vue-i18n';
 import { StartUsingLigoField } from '../../../models/ligo_for_advisors/start_using_ligo';
 
 const PORTAL_ID = '4327817';
@@ -13,16 +15,16 @@ export const onSubmitStartUsingLigo = async (fields: StartUsingLigoField[]) => {
   });
 };
 
-const Validations = (root: RootContext) => {
-  const require = (val) => !!val || root.$t('validations.required_generic');
-  const validEmail = (val) =>
-    /.+@.+\..+.+/.test(val) || root.$t('validations.email_format');
+const Validations = (i18n: Composer) => {
+  const require = (val: any) => !!val || i18n.t('validations.required_generic');
+  const validEmail = (val: any) =>
+    /.+@.+\..+.+/.test(val) || i18n.t('validations.email_format');
 
   return { require, validEmail };
 };
 
-export const getFlieds = (root: RootContext) => {
-  const { require, validEmail } = Validations(root);
+export const getFlieds = (i18n: Composer) => {
+  const { require, validEmail } = Validations(i18n);
 
   const fields = [
     {
@@ -58,11 +60,11 @@ export const getFlieds = (root: RootContext) => {
   return fields;
 };
 
-export const useStartUsingLigo = (root: RootContext) => {
+export const useStartUsingLigo = (i18n: Composer, $q: QVueGlobals) => {
   const loading = ref(false);
   const sent = ref(false);
 
-  const fields = getFlieds(root);
+  const fields = getFlieds(i18n);
 
   const onSubmit = async () => {
     const response = [
@@ -88,12 +90,12 @@ export const useStartUsingLigo = (root: RootContext) => {
       loading.value = true;
       await onSubmitStartUsingLigo(response);
       sent.value = true;
-    } catch (e) {
+    } catch (e: any) {
       if (e.response.status == 400) {
-        root.$q.notify({
+        $q.notify({
           type: 'negative',
           position: 'top',
-          message: root.$t('validations.hubspot').toString()
+          message: i18n.t('validations.hubspot').toString()
         });
       }
     } finally {

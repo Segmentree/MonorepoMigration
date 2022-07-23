@@ -71,6 +71,7 @@ import { getNumberOfCols } from './cards-list.hook';
 
 import CardWithLink from './CardWithLink.vue';
 import SectionComponent from '../../../global/Section.vue';
+import { useQuasar } from 'quasar';
 
 export default defineComponent({
   name: 'CardsList',
@@ -116,13 +117,14 @@ export default defineComponent({
       default: false
     }
   },
-  setup(props, { root }) {
+  setup(props) {
+    const $q = useQuasar()
     const slide = ref(1);
 
     const cardsCol = computed(() => {
       let desktop = getNumberOfCols(props.cardsPerRowOnDesktop);
       let mobile = getNumberOfCols(props.cardsPerRowOnMobile);
-      return root.$q.screen.xs ? mobile : desktop;
+      return $q.screen.xs ? mobile : desktop;
     });
 
     return {

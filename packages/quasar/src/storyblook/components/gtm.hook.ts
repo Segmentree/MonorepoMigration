@@ -1,16 +1,20 @@
 import { useGtm } from '@gtm-support/vue2-gtm';
-import { RootContext } from '../../../../utils/src';
+import { RouteLocationNormalized } from 'vue-router';
 
-export function triggerRouteGTM(root: RootContext, meta: {title: string}) {
-    const gtm = useGtm();
+export function triggerRouteGTM(
+  route: RouteLocationNormalized,
+  meta: { title: string }
+) {
+  const gtm = useGtm();
+  const payload = {
+    event: 'Loaded a Page',
+    url: window.location.href,
+    title: meta.title,
+    path: route.path,
+    referrer: document.referrer,
+  };
 
-    const payload = {
-      event: 'Loaded a Page',
-      url: window.location.href,
-      title: meta.title,
-      path: root.$route.path,
-      referrer: document.referrer
-    };
-
+  if (gtm) {
     gtm.trackEvent(payload);
+  }
 }

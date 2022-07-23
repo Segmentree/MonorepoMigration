@@ -79,7 +79,9 @@
 <script lang="ts">
 const ASTERISK = '*';
 
+import { useQuasar } from 'quasar';
 import { defineComponent, PropType, computed } from 'vue';
+import { useI18n } from 'vue-i18n';
 import SectionComponent from '../../global/Section.vue';
 import { useStartUsingLigo } from './startusingligo.hook';
 
@@ -89,53 +91,57 @@ export default defineComponent({
   props: {
     title: {
       type: String,
-      required: true
+      required: true,
     },
     subtitle: {
       type: String,
-      required: true
+      required: true,
     },
     bulletPoints: {
-      type: (Array as unknown) as PropType<string[]>,
-      default: () => []
+      type: Array as unknown as PropType<string[]>,
+      default: () => [],
     },
     buttonText: {
       type: String,
-      required: true
+      required: true,
     },
     buttonLink: {
       type: String,
-      required: true
+      required: true,
     },
     bgColor: {
       type: String,
-      default: 'primary'
+      default: 'primary',
     },
     inputMarkedColor: {
       type: String,
-      default: 'blue'
+      default: 'blue',
     },
     inputBgColor: {
       type: String,
-      default: 'white'
+      default: 'white',
     },
     buttonTextColor: {
       type: String,
-      default: 'white'
+      default: 'white',
     },
     buttonBgColor: {
       type: String,
-      default: 'grey-14'
-    }
+      default: 'grey-14',
+    },
   },
 
   setup() {
-    const { loading, sent, fields, onSubmit } = useStartUsingLigo(root);
+    const i18n = useI18n();
+    const { loading, sent, fields, onSubmit } = useStartUsingLigo(
+      i18n,
+      useQuasar()
+    );
 
     //`${$t(field.placeholderpath)} ${field.required && '*'}`
     const placeholderMaker = computed(() => {
       return (field) =>
-        `${root.$t(field.placeholderpath)} ${field.required ? ASTERISK : ''}`;
+        `${i18n.t(field.placeholderpath)} ${field.required ? ASTERISK : ''}`;
     });
 
     return {
@@ -144,8 +150,8 @@ export default defineComponent({
       fields,
 
       onSubmit,
-      placeholderMaker
+      placeholderMaker,
     };
-  }
+  },
 });
 </script>

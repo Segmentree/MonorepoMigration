@@ -14,6 +14,7 @@
 import { defineComponent, toRefs } from 'vue';
 import { useStoryblok } from './storyblok.hook';
 import {useI18n} from 'vue-i18n'
+import { useRouter } from 'vue-router';
 export default defineComponent({
   name: 'RoutedPage',
   props: {
@@ -21,7 +22,10 @@ export default defineComponent({
   },
   setup(props, { emit }) {
     const { slug } = toRefs(props);
-    const { story, key } = useStoryblok(slug, emit, i18n);
+    const router = useRouter()
+    const i18n = useI18n()
+    
+    const { story, key } = useStoryblok(slug, router, emit, i18n.locale);
     return { story, key };
   }
 });

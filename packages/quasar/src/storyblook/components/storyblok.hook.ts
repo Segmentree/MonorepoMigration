@@ -1,46 +1,50 @@
-import { ref, watch, toRef, onMounted, Ref } from 'vue';
+import { ref, watch, onMounted, Ref } from 'vue';
+import { Composer, useI18n } from 'vue-i18n';
+import { Router } from 'vue-router';
 import { forcedLanguage } from '../../utils';
 
-export function getURLsDictionary(root: any) {
+export function getURLsDictionary() {
   return {
-    EN: root['$alias'].reverseEnDictionary,
-    NL: root['$alias'].enDictionary
+    // EN: root['$alias'].reverseEnDictionary,
+    // NL: root['$alias'].enDictionary
   };
 }
 
 export function useStoryblok(
   name: Ref<string>,
-  root: any,
+  router: Router,
   emit: any,
   locale: Ref<string>
 ) {
   const story = ref();
   const key = ref(0);
+  const i18n = useI18n() as Composer
 
   function getStory(slug: string, version: string) {
     emit('footer-loading', true);
-    const url = root['$alias'].enDictionary[slug]
-      ? root['$alias'].enDictionary[slug]
-      : root['$alias'].nlDictionary[slug]
-      ? root['$alias'].nlDictionary[slug]
-      : slug;
+    // const url = root['$alias'].enDictionary[slug]
+    //   ? root['$alias'].enDictionary[slug]
+    //   : root['$alias'].nlDictionary[slug]
+    //   ? root['$alias'].nlDictionary[slug]
+    //   : slug;
+    const url = slug
     return root['$storyapi']
       .get('cdn/stories/' + url + '?language=' + locale.value, {
         version
       })
-      .then((response) => {
+      .then((response: any) => {
         story.value = response.data.story;
         key.value += 1;
         forcedLanguage(
-          root,
           response?.data?.story?.content?.forcedLocale,
+          i18n,
+          emit,
           response?.data?.story?.content?.forcedLocaleUrl,
-          emit
         );
       })
       .catch((error: any) => {
         console.log(error);
-        root.$router.push({ name: '404' });
+        router.push({ name: '404' });
       })
       .finally(() => {
         emit('footer-loading', false);
@@ -48,7 +52,7 @@ export function useStoryblok(
   }
 
   function detectContext() {
-    if (window.storyblok.isInEditor()) {
+    if ((window as any).storyblok.isInEditor()) {
       getStory(name.value, 'draft');
     } else {
       getStory(name.value, 'published');
@@ -56,10 +60,10 @@ export function useStoryblok(
   }
 
   onMounted(() => {
-    window.storyblok.on('change', () => {
+    (window as any).storyblok.on('change', () => {
       getStory(name.value, 'draft');
     });
-    window.storyblok.pingEditor(() => {
+    (window as any).storyblok.pingEditor(() => {
       detectContext();
     });
   });

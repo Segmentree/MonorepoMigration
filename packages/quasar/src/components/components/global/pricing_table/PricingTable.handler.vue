@@ -63,7 +63,6 @@ export default defineComponent({
   },
   setup(props) {
     const { dynamicSections, dynamicHeaders, index, slides } = useData(
-      root,
       props.sections,
       props.headers
     );
@@ -74,7 +73,7 @@ export default defineComponent({
       slideByHand,
       slideDirection,
       showSlide
-    } = tools(root, props.columns);
+    } = tools(props.columns);
 
     const toolbarHeight = ref(null);
 

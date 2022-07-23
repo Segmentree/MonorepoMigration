@@ -35,11 +35,11 @@ function getToolbarConfig(storyapi: StoryblokClient, locale: 'en' | 'nl') {
       .get(`${API_TOOLBAR_URL(locale)}`, {
         version: 'published'
       })
-      .then((res) => {
+      .then((res: any) => {
         const storyblokToolbarConfig = res.data.story.content.body[0];
         resolve(storyblokToolbarConfig);
       })
-      .catch((e) => {
+      .catch((e: any) => {
         console.log(e);
       });
   });
@@ -64,10 +64,10 @@ export const storyblokBoot = (accessToken: string) => {
       .get('cdn/stories/tools/urls/?language=nl', {
         version: 'published'
       })
-      .then(({ data }) => {
+      .then(({ data }: any) => {
         serializeHashBlok(data);
       })
-      .catch((e) => {
+      .catch((e: any) => {
         console.log(e);
       });
 

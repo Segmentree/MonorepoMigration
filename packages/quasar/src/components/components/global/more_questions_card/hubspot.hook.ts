@@ -1,4 +1,4 @@
-import { ApiService } from '@ligo/shared/utils';
+import { Composer } from 'vue-i18n';
 
 const PORTAL_ID = '4327817';
 const ACCOUNTANT_FORM = '1dbc5081-68e7-4e23-a254-d7ccce61662d';
@@ -16,10 +16,10 @@ export const onSubmitAccountant = async (fields: Field[]) => {
   });
 };
 
-export const useValidations = () => {
+export const useValidations = (i18n: Composer) => {
   const required = (val: string) =>
-    !!val || $t('validations.required_generic');
+    !!val || i18n.t('validations.required_generic');
   const validEmail = (v: string) =>
-    /.+@.+\..+.+/.test(v) || $t('validations.email_format');
+    /.+@.+\..+.+/.test(v) || i18n.t('validations.email_format');
   return { required, validEmail };
 };

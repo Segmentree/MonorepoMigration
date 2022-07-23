@@ -1,5 +1,7 @@
-import { ApiService, RootContext } from '@ligo/shared/utils';
+import { ApiService } from '@ligo/shared/utils';
+import { QVueGlobals } from 'quasar';
 import { ref } from 'vue';
+import { Composer } from 'vue-i18n';
 import { HubspotField } from '../../../../models/hubspot-field';
 
 const PORTAL_ID = '4327817';
@@ -14,14 +16,14 @@ export const onSubmitEmail = async (fields: HubspotField[]) => {
   });
 };
 
-export const useSubmitEmail = (root: RootContext) => {
+export const useSubmitEmail = (i18n: Composer, $q: QVueGlobals) => {
   const loading = ref(false);
   const sent = ref(false);
   const email = ref('');
 
   const rules = [
-    (val) => !!val || root.$t('validations.required_generic'),
-    (val) => /.+@.+\..+.+/.test(val) || root.$t('validations.email_format')
+    (val: any) => !!val || i18n.t('validations.required_generic'),
+    (val: any) => /.+@.+\..+.+/.test(val) || i18n.t('validations.email_format')
   ];
 
   const onSubmit = async () => {
@@ -38,12 +40,12 @@ export const useSubmitEmail = (root: RootContext) => {
       loading.value = true;
       await onSubmitEmail(response);
       sent.value = true;
-    } catch (e) {
+    } catch (e: any) {
       if (e.response.status == BAD_REQUEST) {
-        root.$q.notify({
+        $q.notify({
           type: 'negative',
           position: 'top',
-          message: root.$t('validations.hubspot').toString()
+          message: i18n.t('validations.hubspot').toString()
         });
       } else {
         console.log('An error occurred while submitting the email: ' + e);
